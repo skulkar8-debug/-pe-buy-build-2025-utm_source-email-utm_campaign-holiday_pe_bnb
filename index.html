@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Scaling for 2026 | STOC</title>
+    <meta name="description" content="Helping platforms scale with confidence in 2026. Diligence designed for buy-and-build velocity.">
+    
+    <!-- Enhanced fonts: Playfair Display for sophisticated headers, Inter for clean body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1a3a52;
+            --secondary-blue: #2c5f7f;
+            --accent-steel: #4682b4;
+            --light-steel: #e8f1f8;
+            --dark-navy: #0f1a2b;
+            --charcoal: #1e293b;
+            --warm-gray: #fafafa;
+            --medium-gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --border-light: #e2e8f0;
+            --orange-accent: #ff6b35;
+            --success-green: #10b981;
+            --text-muted: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--white);
+            background: var(--dark-navy);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+            overflow-x: hidden;
+        }
+        
+        /* Playfair Display for sophisticated headings */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 62vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-blue) 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(70, 130, 180, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            padding: 3rem 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .year-badge {
+            display: inline-block;
+            color: var(--orange-accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            max-width: 800px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--light-steel);
+            max-width: 650px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(70, 130, 180, 0.3);
+            max-width: 650px;
+        }
+        
+        .hero-stat {
+            flex: 1;
+        }
+        
+        .hero-stat-number {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--orange-accent);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--light-steel);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 4.5rem 0;
+        }
+        
+        .section-header {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+        
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-label {
+            color: var(--orange-accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--light-steel);
+            max-width: 700px;
+        }
+        
+        /* Snapshot Bullets */
+        .snapshot-list {
+            max-width: 800px;
+            margin-top: 2rem;
+            background: var(--charcoal);
+            padding: 2.5rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-steel);
+            list-style: none;
+        }
+        
+        .snapshot-list li {
+            color: var(--light-steel);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .snapshot-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .snapshot-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--orange-accent);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        /* Capabilities Section */
+        .capabilities {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+        
+        .capabilities .section-label {
+            color: var(--orange-accent);
+        }
+        
+        .capabilities .section-title,
+        .capabilities .section-description {
+            color: var(--white);
+        }
+        
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .capability-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid rgba(70, 130, 180, 0.2);
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s ease-out;
+        }
+        
+        .capability-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .capability-item:hover {
+            border-color: var(--accent-steel);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .capability-number {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-steel);
+            opacity: 0.3;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .capability-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .capability-item p {
+            color: var(--light-steel);
+            line-height: 1.85;
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        
+        .capability-item p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Differentiation Section */
+        .differentiation {
+            background: var(--charcoal);
+        }
+        
+        .diff-list {
+            max-width: 900px;
+            margin-top: 2.5rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .diff-item {
+            padding: 1.75rem 2rem;
+            background: rgba(70, 130, 180, 0.08);
+            border-left: 3px solid var(--accent-steel);
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .diff-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .diff-item:hover {
+            background: rgba(70, 130, 180, 0.12);
+            border-left-color: var(--orange-accent);
+        }
+        
+        .diff-item strong {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        
+        .diff-item .vs {
+            color: var(--orange-accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .diff-item .contrast {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+        
+        .diff-explainer {
+            color: var(--light-steel);
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.85;
+        }
+        
+        /* When We're Most Helpful Section */
+        .helpful-section {
+            background: var(--primary-blue);
+            border-top: 1px solid rgba(70, 130, 180, 0.3);
+            border-bottom: 1px solid rgba(70, 130, 180, 0.3);
+        }
+        
+        .helpful-list {
+            max-width: 800px;
+            margin-top: 2rem;
+            display: grid;
+            gap: 1.25rem;
+            list-style: none;
+        }
+        
+        .helpful-list li {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light-steel);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(70, 130, 180, 0.2);
+            position: relative;
+        }
+        
+        .helpful-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 1.5rem;
+            color: var(--success-green);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .helpful-list li:last-child::before {
+            content: '⊗';
+            color: var(--medium-gray);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-blue) 100%);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--orange-accent);
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--white);
+            margin-bottom: 1.25rem;
+        }
+        
+        .cta-content p {
+            font-size: 1.1rem;
+            color: var(--light-steel);
+            margin-bottom: 2rem;
+        }
+        
+        .cta-secondary {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent-steel);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            color: var(--orange-accent);
+            text-decoration: underline;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--orange-accent);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: #ff8255;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-navy);
+            color: var(--medium-gray);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--charcoal);
+        }
+        
+        footer a {
+            color: var(--accent-steel);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--orange-accent);
+            text-decoration: underline;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 55vh;
+            }
+            
+            .hero-stats {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .hero-stat {
+                flex: 0 0 calc(50% - 0.75rem);
+            }
+            
+            .hero-stat:last-child {
+                flex: 0 0 100%;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .capabilities-grid {
+                gap: 2rem;
+            }
+            
+            .section-header {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s ease-out;
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="year-badge">2026 Outlook</div>
+                <h1>Helping buy-and-build platforms scale with confidence</h1>
+                <p class="hero-subtitle">Platform-focused diligence designed for repeatability across add-ons and integrations.</p>
+                <a href="#insights" class="btn btn-primary" onclick="trackCTA('view-insights')">View Sample Insights</a>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">15+</div>
+                        <div class="hero-stat-label">Platform Clients</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">40+</div>
+                        <div class="hero-stat-label">Add-On Transactions</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">2025</div>
+                        <div class="hero-stat-label">Year in Focus</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2025 Snapshot Section -->
+    <section id="snapshot" class="fade-in-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">2025 Snapshot</div>
+                <h2 class="section-title">Platform work in 2025</h2>
+            </div>
+            
+            <ul class="snapshot-list">
+                <li><strong>Multi-add-on platform support.</strong> Deal-level diligence combined with portfolio-level normalization as platforms scaled.</li>
+                <li><strong>Repeatable diligence frameworks.</strong> Standardized approaches that maintain speed and analytical rigor across transactions.</li>
+                <li><strong>Decision-useful outputs.</strong> Deliverables focused on the 3–5 items that matter for approvals and integration.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section class="capabilities fade-in-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Core Capabilities</div>
+                <h2 class="section-title">What We Do</h2>
+            </div>
+            
+            <div class="capabilities-grid">
+                <div class="capability-item">
+                    <div class="capability-number">01</div>
+                    <h3>Diligence Designed for Add-On Velocity</h3>
+                    <p><strong>The challenge:</strong> Standard QoE treats every transaction as unique, creating bottlenecks when platforms execute 3–5 deals per year.</p>
+                    <p><strong>What changes:</strong> We standardize repeatable diligence steps across similar targets.</p>
+                    <p><strong>Why it matters:</strong> Faster approvals without losing visibility into deal-specific risk.</p>
+                </div>
+                
+                <div class="capability-item">
+                    <div class="capability-number">02</div>
+                    <h3>Normalization with Integration in Mind</h3>
+                    <p><strong>Beyond standalone performance:</strong> Adjustments reveal how targets will operate under platform ownership.</p>
+                    <p><strong>What we examine:</strong> Cost structures that persist post-close, revenue tied to platform capabilities, and working capital in consolidated environments.</p>
+                    <p><strong>Why it matters:</strong> Enables realistic synergy modeling and surfaces integration friction before closing.</p>
+                </div>
+                
+                <div class="capability-item">
+                    <div class="capability-number">03</div>
+                    <h3>KPI Frameworks That Survive Roll-Ups</h3>
+                    <p><strong>The problem:</strong> Single-business metrics break when applied across portfolios with different systems and operating models.</p>
+                    <p><strong>Our approach:</strong> Build frameworks that remain comparable as platforms scale.</p>
+                    <p><strong>Why it matters:</strong> Monitor performance without requiring Day 1 systems integration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiation Section -->
+    <section id="insights" class="differentiation fade-in-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Why STOC</div>
+                <h2 class="section-title">Where We Add Value</h2>
+            </div>
+            
+            <div class="diff-list">
+                <div class="diff-item">
+                    <div>
+                        <strong>Platform-level insight</strong>
+                        <span class="vs">vs.</span>
+                        <span class="contrast">Single-deal QoE</span>
+                    </div>
+                    <p class="diff-explainer">Optimizes for portfolio impact, integration dependencies, and risks that emerge at scale.</p>
+                </div>
+                
+                <div class="diff-item">
+                    <div>
+                        <strong>Integration-aware normalization</strong>
+                        <span class="vs">vs.</span>
+                        <span class="contrast">Standalone adjustments</span>
+                    </div>
+                    <p class="diff-explainer">Answers what the business will contribute to the platform, not just historical earnings.</p>
+                </div>
+                
+                <div class="diff-item">
+                    <div>
+                        <strong>Operator-informed outputs</strong>
+                        <span class="vs">vs.</span>
+                        <span class="contrast">Theoretical analysis</span>
+                    </div>
+                    <p class="diff-explainer">Recognizes which savings are realistic, which synergies need prerequisites, and practical sequencing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- When We're Most Helpful Section -->
+    <section class="helpful-section fade-in-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Fit Assessment</div>
+                <h2 class="section-title">When We're Helpful</h2>
+            </div>
+            
+            <ul class="helpful-list">
+                <li>
+                    <strong>Multi-add-on buy-and-build platforms</strong>
+                    <br>
+                    Diligence becomes a repeatable operating function once acquisition volume increases.
+                </li>
+                
+                <li>
+                    <strong>Platform-scale diligence needs</strong>
+                    <br>
+                    Most valuable when multiple deals must be evaluated in parallel using consistent logic.
+                </li>
+                
+                <li>
+                    <strong>Not built for one-off transactions</strong>
+                    <br>
+                    Bespoke or first-of-kind deals are better served by traditional, fully custom QoE.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to scale with confidence?</h2>
+                <p>See how platform-focused diligence supports your 2026 buy-and-build strategy.</p>
+                <a href="#" class="btn btn-primary" onclick="trackCTA('view-insights-cta'); return downloadInsights();">View Sample Insights</a>
+                <br>
+                <a href="#" class="cta-secondary" onclick="trackCTA('connect'); return scheduleCall();">Connect in early 2026</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 STOC. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations - simplified
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Stagger animations for items within sections
+                    const items = entry.target.querySelectorAll('.capability-item, .diff-item');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated sections
+        document.querySelectorAll('.fade-in-section, .section-header').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Analytics tracking functions
+        function trackCTA(action) {
+            // Google Analytics tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cta_click', {
+                    'event_category': 'engagement',
+                    'event_label': action,
+                    'value': 1
+                });
+            }
+            
+            console.log('CTA tracked:', action);
+        }
+
+        // Track page view on load
+        window.addEventListener('load', () => {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': 'PE Buy-and-Build Landing Page',
+                    'page_location': window.location.href,
+                    'page_path': window.location.pathname
+                });
+            }
+        });
+
+        // Track time on page
+        let startTime = Date.now();
+        window.addEventListener('beforeunload', () => {
+            const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'timing_complete', {
+                    'name': 'time_on_page',
+                    'value': timeOnPage,
+                    'event_category': 'engagement'
+                });
+            }
+        });
+
+        // CTA functions
+        function downloadInsights() {
+            alert('This would trigger your document download or email with sample insights.');
+            return false;
+        }
+
+        function scheduleCall() {
+            alert('This would open your scheduling tool (Calendly, HubSpot Meetings, etc.)');
+            return false;
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <!-- Google Analytics (replace with your tracking ID) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+</body>
+</html>
