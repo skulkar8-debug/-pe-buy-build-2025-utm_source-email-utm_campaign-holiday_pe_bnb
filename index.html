@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platform Scaling for 2026 | STOC</title>
-    <meta name="description" content="Helping platforms scale with confidence in 2026. Diligence designed for buy-and-build velocity.">
+    <title>Buy-and-Build Platform Scaling | STOC Advisory</title>
+    <meta name="description" content="Helping platforms scale with confidence in 2026. Repeatable diligence designed for buy-and-build velocity.">
     
     <!-- Enhanced fonts: Playfair Display for sophisticated headers, Inter for clean body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,9 +53,48 @@
             line-height: 1.2;
         }
         
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 26, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(70, 130, 180, 0.2);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: var(--light-steel);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--orange-accent);
+        }
+        
+        .nav-logo {
+            font-weight: 700;
+            color: var(--white) !important;
+            margin-right: auto;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        
         /* Hero Section */
         .hero {
-            min-height: 62vh;
+            min-height: 65vh;
             display: flex;
             align-items: center;
             position: relative;
@@ -70,8 +109,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(70, 130, 180, 0.06) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(70, 130, 180, 0.06) 0%, transparent 50%);
             pointer-events: none;
         }
         
@@ -84,9 +122,12 @@
         }
         
         .hero-content {
-            padding: 3rem 0;
+            padding: 4rem 0;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         @keyframes fadeInUp {
@@ -116,31 +157,124 @@
             margin-bottom: 1.5rem;
             font-weight: 600;
             max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-subtitle {
             font-size: 1.2rem;
             color: var(--light-steel);
             max-width: 650px;
-            margin-bottom: 2rem;
+            margin: 0 auto 2rem;
             line-height: 1.6;
         }
         
-        .hero-stats {
+        .hero-bullets {
+            list-style: none;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        
+        .hero-bullets li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: var(--light-steel);
+            text-align: left;
+        }
+        
+        .hero-bullets li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--orange-accent);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .cta-group {
             display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
+            gap: 24px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--orange-accent);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: #ff8255;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-secondary {
+            color: var(--accent-steel);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            padding: 0;
+        }
+        
+        .btn-secondary:hover {
+            color: var(--orange-accent);
+            text-decoration: underline;
+        }
+        
+        /* Stats Strip */
+        .stats-strip {
+            padding: 4.5rem 0;
+            background: var(--charcoal);
             border-top: 1px solid rgba(70, 130, 180, 0.3);
-            max-width: 650px;
+            border-bottom: 1px solid rgba(70, 130, 180, 0.3);
         }
         
-        .hero-stat {
-            flex: 1;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
         }
         
-        .hero-stat-number {
-            font-size: 2rem;
+        .stat-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        
+        .stat-card:nth-child(1) { --i: 1; }
+        .stat-card:nth-child(2) { --i: 2; }
+        .stat-card:nth-child(3) { --i: 3; }
+        .stat-card:nth-child(4) { --i: 4; }
+        .stat-card:nth-child(5) { --i: 5; }
+        .stat-card:nth-child(6) { --i: 6; }
+        
+        .stat-number {
+            font-size: 2.5rem;
             font-family: 'Playfair Display', serif;
             color: var(--orange-accent);
             font-weight: 600;
@@ -148,16 +282,24 @@
             margin-bottom: 0.5rem;
         }
         
-        .hero-stat-label {
+        .stat-label {
             font-size: 0.85rem;
             color: var(--light-steel);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        /* Section Styling */
+        .stat-detail {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+        
+        /* Section Styles */
         section {
             padding: 4.5rem 0;
+            text-align: center;
         }
         
         .section-header {
@@ -191,54 +333,30 @@
             font-size: 1.1rem;
             color: var(--light-steel);
             max-width: 700px;
+            margin: 0 auto;
         }
         
-        /* Snapshot Bullets */
-        .snapshot-list {
-            max-width: 800px;
-            margin-top: 2rem;
-            background: var(--charcoal);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border-left: 3px solid var(--accent-steel);
-            list-style: none;
-        }
-        
-        .snapshot-list li {
-            color: var(--light-steel);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-        
-        .snapshot-list li:last-child {
-            margin-bottom: 0;
-        }
-        
-        .snapshot-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--orange-accent);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        /* Capabilities Section */
-        .capabilities {
+        /* Year in Review Section */
+        .year-review-section {
             background: var(--primary-blue);
             color: var(--white);
         }
         
-        .capabilities .section-label {
-            color: var(--orange-accent);
+        .year-review {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .capabilities .section-title,
-        .capabilities .section-description {
-            color: var(--white);
+        .year-review p {
+            color: var(--light-steel);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Built for Buy-and-Builds Section */
+        .capabilities-section {
+            background: var(--charcoal);
         }
         
         .capabilities-grid {
@@ -246,6 +364,9 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             margin-top: 3rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .capability-item {
@@ -256,6 +377,7 @@
             opacity: 0;
             transform: translateY(15px);
             transition: all 0.5s ease-out;
+            text-align: left;
         }
         
         .capability-item.visible {
@@ -268,18 +390,14 @@
             background: rgba(255, 255, 255, 0.08);
         }
         
-        .capability-number {
-            font-size: 2.5rem;
-            font-family: 'Playfair Display', serif;
+        .capability-icon {
+            font-size: 1.5rem;
             color: var(--accent-steel);
-            opacity: 0.3;
-            font-weight: 600;
             margin-bottom: 1rem;
-            line-height: 1;
         }
         
         .capability-item h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 0.75rem;
             color: var(--white);
             font-weight: 600;
@@ -287,75 +405,8 @@
         
         .capability-item p {
             color: var(--light-steel);
-            line-height: 1.85;
-            font-size: 1rem;
-            margin-bottom: 0.6rem;
-        }
-        
-        .capability-item p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Differentiation Section */
-        .differentiation {
-            background: var(--charcoal);
-        }
-        
-        .diff-list {
-            max-width: 900px;
-            margin-top: 2.5rem;
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .diff-item {
-            padding: 1.75rem 2rem;
-            background: rgba(70, 130, 180, 0.08);
-            border-left: 3px solid var(--accent-steel);
-            border-radius: 4px;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.5s ease-out;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .diff-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .diff-item:hover {
-            background: rgba(70, 130, 180, 0.12);
-            border-left-color: var(--orange-accent);
-        }
-        
-        .diff-item strong {
-            color: var(--white);
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-        
-        .diff-item .vs {
-            color: var(--orange-accent);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .diff-item .contrast {
-            color: var(--medium-gray);
+            line-height: 1.6;
             font-size: 0.95rem;
-        }
-        
-        .diff-explainer {
-            color: var(--light-steel);
-            font-size: 0.95rem;
-            margin-top: 0.75rem;
-            margin-bottom: 0.6rem;
-            line-height: 1.85;
         }
         
         /* When We're Most Helpful Section */
@@ -365,48 +416,90 @@
             border-bottom: 1px solid rgba(70, 130, 180, 0.3);
         }
         
-        .helpful-list {
-            max-width: 800px;
-            margin-top: 2rem;
+        .scenario-grid {
             display: grid;
-            gap: 1.25rem;
-            list-style: none;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
         }
         
-        .helpful-list li {
+        .scenario-item {
             background: rgba(255, 255, 255, 0.05);
             color: var(--light-steel);
             font-size: 1.05rem;
             line-height: 1.85;
-            padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+            padding: 1.75rem;
             border-radius: 4px;
             border: 1px solid rgba(70, 130, 180, 0.2);
             position: relative;
+            text-align: center;
+            transition: all 0.3s ease;
         }
         
-        .helpful-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 1.5rem;
-            color: var(--success-green);
-            font-weight: 700;
-            font-size: 1.2rem;
+        .scenario-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-steel);
         }
         
-        .helpful-list li:last-child::before {
-            content: '⊗';
-            color: var(--medium-gray);
+        /* Differentiated Value Section */
+        .differentiation {
+            background: var(--dark-navy);
         }
         
-        /* CTA Section */
-        .cta-section {
+        .value-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .value-card {
+            padding: 2rem;
+            background: rgba(70, 130, 180, 0.08);
+            border-left: 3px solid var(--accent-steel);
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s ease-out;
+            text-align: left;
+        }
+        
+        .value-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .value-card:hover {
+            background: rgba(70, 130, 180, 0.12);
+            border-left-color: var(--orange-accent);
+        }
+        
+        .value-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .value-card p {
+            color: var(--light-steel);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Final CTA Section */
+        .final-cta {
             background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-blue) 100%);
-            padding: 4rem 0;
+            padding: 5rem 0;
             text-align: center;
             position: relative;
         }
         
-        .cta-section::before {
+        .final-cta::before {
             content: '';
             position: absolute;
             top: 0;
@@ -434,47 +527,6 @@
             margin-bottom: 2rem;
         }
         
-        .cta-secondary {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--accent-steel);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-secondary:hover {
-            color: var(--orange-accent);
-            text-decoration: underline;
-        }
-        
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .btn-primary {
-            background: var(--orange-accent);
-            color: var(--white);
-        }
-        
-        .btn-primary:hover {
-            background: #ff8255;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
-        }
-        
         /* Footer */
         footer {
             background: var(--dark-navy);
@@ -495,36 +547,10 @@
             text-decoration: underline;
         }
         
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero {
-                min-height: 55vh;
-            }
-            
-            .hero-stats {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-            }
-            
-            .hero-stat {
-                flex: 0 0 calc(50% - 0.75rem);
-            }
-            
-            .hero-stat:last-child {
-                flex: 0 0 100%;
-            }
-            
-            section {
-                padding: 3rem 0;
-            }
-            
-            .capabilities-grid {
-                gap: 2rem;
-            }
-            
-            .section-header {
-                margin-bottom: 2rem;
-            }
+        .utm-source {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--medium-gray);
         }
         
         /* Scroll animations */
@@ -538,166 +564,275 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero {
+                min-height: 60vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-bullets li {
+                font-size: 1rem;
+                padding-left: 1.75rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .capabilities-grid,
+            .scenario-grid,
+            .value-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 2rem;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+            
+            .cta-group {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#" class="nav-logo">STOC Advisory</a></li>
+                <li><a href="#year-review">2025 Review</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#helpful">When We Help</a></li>
+                <li><a href="#value">Value</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="year-badge">2026 Outlook</div>
-                <h1>Helping buy-and-build platforms scale with confidence</h1>
-                <p class="hero-subtitle">Platform-focused diligence designed for repeatability across add-ons and integrations.</p>
-                <a href="#insights" class="btn btn-primary" onclick="trackCTA('view-insights')">View Sample Insights</a>
+                <h1>Helping platforms scale with confidence in 2026</h1>
+                <p class="hero-subtitle">Repeatable diligence built for buy-and-build platforms—fast, operator-informed, and designed to hold up through integration.</p>
                 
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">15+</div>
-                        <div class="hero-stat-label">Platform Clients</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">40+</div>
-                        <div class="hero-stat-label">Add-On Transactions</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">2025</div>
-                        <div class="hero-stat-label">Year in Focus</div>
-                    </div>
+                <ul class="hero-bullets">
+                    <li>Diligence designed for add-on velocity</li>
+                    <li>Normalization that survives roll-ups</li>
+                    <li>Platform-level insight—not a one-off QoE</li>
+                </ul>
+                
+                <div class="cta-group">
+                    <a href="mailto:aswihart@stocadvisory.com?subject=Intro%20—%20Buy-and-Build%20diligence%20support&body=Hi%20STOC%20team%2C%0A%0AI%20came%20from%20your%20year-in-review%20note.%20We%E2%80%99d%20like%20to%20discuss%20diligence%20support%20for%20a%20buy-and-build%20platform.%0A%0ATiming%3A%0ASector%3A%0APlatform%20size%20%2F%20add-on%20pace%3A%0ABest%20contact%3A%0A%E2%80%94" 
+                       class="btn btn-primary cta-button" data-cta-id="hero-primary">Connect in early 2026</a>
+                    <a href="#value" class="btn-secondary">View our approach →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2025 Snapshot Section -->
-    <section id="snapshot" class="fade-in-section">
+    <!-- Stats Strip -->
+    <section class="stats-strip">
         <div class="container">
-            <div class="section-header">
-                <div class="section-label">2025 Snapshot</div>
-                <h2 class="section-title">Platform work in 2025</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">73</div>
+                    <div class="stat-label">QoEs delivered in 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Buy-and-build platforms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Add-on diligences</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Active CDS clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">States / metros covered</div>
+                    <div class="stat-detail">Including: New Jersey, NYC, Chicago, Bay Area, Phoenix, Seattle, Dallas, Charlotte</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2-3</div>
+                    <div class="stat-label">Week turnaround</div>
+                    <div class="stat-detail">Expedited for add-ons</div>
+                </div>
             </div>
-            
-            <ul class="snapshot-list">
-                <li><strong>Multi-add-on platform support.</strong> Deal-level diligence combined with portfolio-level normalization as platforms scaled.</li>
-                <li><strong>Repeatable diligence frameworks.</strong> Standardized approaches that maintain speed and analytical rigor across transactions.</li>
-                <li><strong>Decision-useful outputs.</strong> Deliverables focused on the 3–5 items that matter for approvals and integration.</li>
-            </ul>
         </div>
     </section>
 
-    <!-- Capabilities Section -->
-    <section class="capabilities fade-in-section">
+    <!-- 2025 Year in Review -->
+    <section id="year-review" class="year-review-section fade-in-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">2025 Year in Review</div>
+                <h2 class="section-title">Platform growth through consistency</h2>
+            </div>
+            <div class="year-review">
+                <p>This year marked a significant expansion in our buy-and-build support capabilities. We partnered with six unique platforms executing aggressive add-on strategies, delivering normalized views that held up through integration and post-close reporting.</p>
+                <p>Our geographic footprint expanded to cover over 30 metropolitan areas and states, allowing us to provide local market context and operational insights across diverse regulatory and competitive environments.</p>
+                <p>The consistency of our approach—from initial platform diligence through subsequent add-ons—helped sponsors maintain velocity while building conviction in integration synergies and margin sustainability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Built for Buy-and-Builds -->
+    <section id="capabilities" class="capabilities-section fade-in-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Core Capabilities</div>
-                <h2 class="section-title">What We Do</h2>
+                <h2 class="section-title">Built for Buy-and-Builds</h2>
+                <p class="section-description">Diligence that scales with your platform ambitions</p>
             </div>
-            
             <div class="capabilities-grid">
                 <div class="capability-item">
-                    <div class="capability-number">01</div>
-                    <h3>Diligence Designed for Add-On Velocity</h3>
-                    <p><strong>The challenge:</strong> Standard QoE treats every transaction as unique, creating bottlenecks when platforms execute 3–5 deals per year.</p>
-                    <p><strong>What changes:</strong> We standardize repeatable diligence steps across similar targets.</p>
-                    <p><strong>Why it matters:</strong> Faster approvals without losing visibility into deal-specific risk.</p>
+                    <div class="capability-icon">→</div>
+                    <h3>Add-on velocity without compromise</h3>
+                    <p>Fast turnaround diligence that maintains analytical depth. We standardize repeatable steps while preserving deal-specific insights.</p>
                 </div>
-                
                 <div class="capability-item">
-                    <div class="capability-number">02</div>
-                    <h3>Normalization with Integration in Mind</h3>
-                    <p><strong>Beyond standalone performance:</strong> Adjustments reveal how targets will operate under platform ownership.</p>
-                    <p><strong>What we examine:</strong> Cost structures that persist post-close, revenue tied to platform capabilities, and working capital in consolidated environments.</p>
-                    <p><strong>Why it matters:</strong> Enables realistic synergy modeling and surfaces integration friction before closing.</p>
+                    <div class="capability-icon">→</div>
+                    <h3>Normalized for comparability</h3>
+                    <p>EBITDA adjustments built for cross-portfolio comparison. Every target analyzed through the same lens, creating true apple-to-apple views.</p>
                 </div>
-                
                 <div class="capability-item">
-                    <div class="capability-number">03</div>
-                    <h3>KPI Frameworks That Survive Roll-Ups</h3>
-                    <p><strong>The problem:</strong> Single-business metrics break when applied across portfolios with different systems and operating models.</p>
-                    <p><strong>Our approach:</strong> Build frameworks that remain comparable as platforms scale.</p>
-                    <p><strong>Why it matters:</strong> Monitor performance without requiring Day 1 systems integration.</p>
+                    <div class="capability-icon">→</div>
+                    <h3>Integration-aware analysis</h3>
+                    <p>Working capital and margin views that anticipate post-close realities. We separate sustainable performance from integration noise.</p>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-icon">→</div>
+                    <h3>KPI continuity</h3>
+                    <p>Frameworks that carry forward post-close without requiring Day 1 systems integration. Monitor performance from signing to exit.</p>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-icon">→</div>
+                    <h3>Clear issue framing</h3>
+                    <p>Not just identifying problems but sizing their impact. Decision-useful outputs for IC presentations and operating discussions.</p>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-icon">→</div>
+                    <h3>Founder-friendly approach</h3>
+                    <p>Maintain deal momentum while uncovering critical risks. Professional diligence that doesn't spook sellers or slow velocity.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Differentiation Section -->
-    <section id="insights" class="differentiation fade-in-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Why STOC</div>
-                <h2 class="section-title">Where We Add Value</h2>
-            </div>
-            
-            <div class="diff-list">
-                <div class="diff-item">
-                    <div>
-                        <strong>Platform-level insight</strong>
-                        <span class="vs">vs.</span>
-                        <span class="contrast">single-deal QoE</span>
-                    </div>
-                    <p class="diff-explainer">Optimizes for portfolio impact, integration dependencies, and risks that emerge at scale.</p>
-                </div>
-                
-                <div class="diff-item">
-                    <div>
-                        <strong>Integration-aware normalization</strong>
-                        <span class="vs">vs.</span>
-                        <span class="contrast">standalone adjustments</span>
-                    </div>
-                    <p class="diff-explainer">Answers what the business will contribute to the platform, not just historical earnings.</p>
-                </div>
-                
-                <div class="diff-item">
-                    <div>
-                        <strong>Operator-informed outputs</strong>
-                        <span class="vs">vs.</span>
-                        <span class="contrast">theoretical analysis</span>
-                    </div>
-                    <p class="diff-explainer">Recognizes which savings are realistic, which synergies need prerequisites, and practical sequencing.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- When We're Most Helpful Section -->
-    <section class="helpful-section fade-in-section">
+    <!-- When We're Most Helpful -->
+    <section id="helpful" class="helpful-section fade-in-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Fit Assessment</div>
-                <h2 class="section-title">When We're Helpful</h2>
+                <h2 class="section-title">When We're Most Helpful</h2>
             </div>
-            
-            <ul class="helpful-list">
-                <li>
-                    <strong>Multi-add-on buy-and-build platforms</strong>
-                    <br>
-                    Diligence becomes a repeatable operating function once acquisition volume increases.
-                </li>
-                
-                <li>
-                    <strong>Platform-scale diligence needs</strong>
-                    <br>
-                    Most valuable when multiple deals must be evaluated in parallel using consistent logic.
-                </li>
-                
-                <li>
-                    <strong>Not built for one-off transactions</strong>
-                    <br>
-                    Bespoke or first-of-kind deals are better served by traditional, fully custom QoE.
-                </li>
-            </ul>
+            <div class="scenario-grid">
+                <div class="scenario-item">You're executing multiple add-ons per year and need consistent normalization methodology</div>
+                <div class="scenario-item">Your IC needs clean comparability across targets in different regions</div>
+                <div class="scenario-item">You want diligence outputs that plug directly into post-close reporting</div>
+                <div class="scenario-item">Integration is creating noise in margins, payroll, or revenue recognition</div>
+                <div class="scenario-item">You need fast-turn diligence with a founder-friendly approach</div>
+                <div class="scenario-item">Platform reporting needs standardization before your next capital event</div>
+            </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="contact" class="cta-section">
+    <!-- Differentiated Value -->
+    <section id="value" class="differentiation fade-in-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Why STOC</div>
+                <h2 class="section-title">Differentiated Value</h2>
+            </div>
+            <div class="value-cards">
+                <div class="value-card">
+                    <h3>Platform repeatability</h3>
+                    <p>Our diligence framework scales with your platform. Consistent methodology, comparable outputs, and cumulative learning across add-ons create efficiency gains over time.</p>
+                    <p>We maintain institutional knowledge of your platform's operating model, making each subsequent diligence faster and more targeted.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Operator-informed diligence</h3>
+                    <p>We think like operators, not just auditors. Our analysis focuses on what drives the business, what breaks during integration, and what creates sustainable value.</p>
+                    <p>Every normalization decision considers both deal dynamics and post-close reality.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Clear decision support</h3>
+                    <p>Complex situations distilled into clear recommendations. We quantify impacts, rank risks, and frame decisions for both IC presentations and operating discussions.</p>
+                    <p>Our outputs work equally well for investment committees and integration planning sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to scale with confidence?</h2>
-                <p>See how platform-focused diligence supports your 2026 buy-and-build strategy.</p>
-                <a href="#" class="btn btn-primary" onclick="trackCTA('view-insights-cta'); return downloadInsights();">View Sample Insights</a>
-                <br>
-                <a href="#" class="cta-secondary" onclick="trackCTA('connect'); return scheduleCall();">Connect in early 2026</a>
+                <h2>Ready to accelerate your platform in 2026?</h2>
+                <p>Let's discuss how repeatable diligence can support your buy-and-build strategy.</p>
+                <a href="mailto:aswihart@stocadvisory.com?subject=Intro%20—%20Buy-and-Build%20diligence%20support&body=Hi%20STOC%20team%2C%0A%0AI%20came%20from%20your%20year-in-review%20note.%20We%E2%80%99d%20like%20to%20discuss%20diligence%20support%20for%20a%20buy-and-build%20platform.%0A%0ATiming%3A%0ASector%3A%0APlatform%20size%20%2F%20add-on%20pace%3A%0ABest%20contact%3A%0A%E2%80%94" 
+                   class="btn btn-primary cta-button" data-cta-id="final-cta">Connect in early 2026</a>
             </div>
         </div>
     </section>
@@ -705,12 +840,63 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 STOC. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+            <p>&copy; 2025 STOC Advisory. Transaction diligence for middle-market private equity.</p>
+            <div id="utm-display" class="utm-source"></div>
         </div>
     </footer>
 
     <script>
-        // Intersection Observer for scroll animations - simplified
+        // UTM Parameter Tracking
+        function getUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            const utmData = {
+                utm_source: params.get('utm_source') || '',
+                utm_campaign: params.get('utm_campaign') || '',
+                utm_medium: params.get('utm_medium') || '',
+                utm_content: params.get('utm_content') || '',
+                utm_term: params.get('utm_term') || ''
+            };
+            
+            // Store in sessionStorage
+            if (Object.values(utmData).some(val => val)) {
+                sessionStorage.setItem('stoc_utm', JSON.stringify(utmData));
+            }
+            
+            return utmData;
+        }
+        
+        // Display UTM source in footer if present
+        function displayUTMSource() {
+            const utmData = JSON.parse(sessionStorage.getItem('stoc_utm') || '{}');
+            if (utmData.utm_source) {
+                const display = document.getElementById('utm-display');
+                if (display) {
+                    display.textContent = `Source: ${utmData.utm_source}`;
+                }
+            }
+        }
+        
+        // CTA Click Tracking
+        function trackCTAClick(event) {
+            const button = event.currentTarget;
+            const utmData = JSON.parse(sessionStorage.getItem('stoc_utm') || '{}');
+            
+            const trackingData = {
+                event: 'cta_click',
+                page_id: '/pe-buy-build-2025',
+                cta_id: button.getAttribute('data-cta-id'),
+                timestamp_iso: new Date().toISOString(),
+                utm_source: utmData.utm_source || '',
+                utm_campaign: utmData.utm_campaign || '',
+                utm_medium: utmData.utm_medium || '',
+                utm_content: utmData.utm_content || '',
+                utm_term: utmData.utm_term || ''
+            };
+            
+            console.log(trackingData);
+        }
+        
+        // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
@@ -722,7 +908,7 @@
                     entry.target.classList.add('visible');
                     
                     // Stagger animations for items within sections
-                    const items = entry.target.querySelectorAll('.capability-item, .diff-item');
+                    const items = entry.target.querySelectorAll('.capability-item, .value-card');
                     items.forEach((item, index) => {
                         setTimeout(() => {
                             item.classList.add('visible');
@@ -731,84 +917,44 @@
                 }
             });
         }, observerOptions);
-
-        // Observe all animated sections
-        document.querySelectorAll('.fade-in-section, .section-header').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Analytics tracking functions
-        function trackCTA(action) {
-            // Google Analytics tracking
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'cta_click', {
-                    'event_category': 'engagement',
-                    'event_label': action,
-                    'value': 1
-                });
-            }
-            
-            console.log('CTA tracked:', action);
-        }
-
-        // Track page view on load
-        window.addEventListener('load', () => {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'page_view', {
-                    'page_title': 'PE Buy-and-Build Landing Page',
-                    'page_location': window.location.href,
-                    'page_path': window.location.pathname
-                });
-            }
-        });
-
-        // Track time on page
-        let startTime = Date.now();
-        window.addEventListener('beforeunload', () => {
-            const timeOnPage = Math.round((Date.now() - startTime) / 1000);
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'timing_complete', {
-                    'name': 'time_on_page',
-                    'value': timeOnPage,
-                    'event_category': 'engagement'
-                });
-            }
-        });
-
-        // CTA functions
-        function downloadInsights() {
-            alert('This would trigger your document download or email with sample insights.');
-            return false;
-        }
-
-        function scheduleCall() {
-            alert('This would open your scheduling tool (Calendly, HubSpot Meetings, etc.)');
-            return false;
-        }
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && document.querySelector(href)) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
+        
+        // Smooth scrolling for anchor links
+        function smoothScroll(event) {
+            if (event.target.hash) {
+                event.preventDefault();
+                const target = document.querySelector(event.target.hash);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get and store UTM parameters
+            getUTMParams();
+            displayUTMSource();
+            
+            // Add click tracking to all CTA buttons
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', trackCTAClick);
+            });
+            
+            // Add smooth scrolling to nav links
+            const navLinks = document.querySelectorAll('nav a[href^="#"], .btn-secondary[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', smoothScroll);
+            });
+            
+            // Observe all animated sections
+            document.querySelectorAll('.fade-in-section, .section-header').forEach(section => {
+                observer.observe(section);
             });
         });
     </script>
-
-    <!-- Google Analytics (replace with your tracking ID) -->
-    <!-- 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    -->
 </body>
 </html>
