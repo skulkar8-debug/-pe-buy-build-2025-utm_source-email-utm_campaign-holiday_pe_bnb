@@ -6,27 +6,27 @@
     <title>Buy-and-Build Platform Scaling | STOC Advisory</title>
     <meta name="description" content="Helping platforms scale with confidence in 2026. Repeatable diligence designed for buy-and-build velocity.">
     
-    <!-- Enhanced fonts matching stocadvisory.com -->
+    <!-- Fonts matching stocadvisory.com -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-blue: #1a3a52;
-            --secondary-blue: #2c5f7f;
-            --accent-steel: #4682b4;
-            --light-steel: #e8f1f8;
-            --dark-navy: #0f1a2b;
-            --charcoal: #1e293b;
-            --warm-gray: #fafafa;
-            --medium-gray: #64748b;
-            --light-gray: #f1f5f9;
+            /* Colors from stocadvisory.com */
+            --navy: #0A1628;
+            --dark-blue: #1e3a5f;
+            --medium-blue: #2c5282;
+            --light-blue: #3182ce;
+            --accent-blue: #4299e1;
+            --pale-blue: #90cdf4;
+            --bg-light: #f7fafc;
+            --text-dark: #2d3748;
+            --text-muted: #718096;
+            --text-light: #a0aec0;
             --white: #ffffff;
-            --border-light: #e2e8f0;
-            --orange-accent: #ff6b35;
-            --success-green: #10b981;
-            --text-muted: #6b7280;
+            --border-color: #e2e8f0;
+            --highlight: #ed8936;
         }
         
         * {
@@ -36,295 +36,272 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--white);
-            background: var(--dark-navy);
-            line-height: 1.7;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            font-feature-settings: 'kern' 1, 'liga' 1;
-            overflow-x: hidden;
         }
         
-        /* Typography matching stocadvisory.com */
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
             line-height: 1.2;
+            color: var(--navy);
         }
         
         /* Navigation */
         nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            background: rgba(15, 26, 43, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(70, 130, 180, 0.2);
             z-index: 1000;
-            padding: 16px 0;
+            padding: 1rem 0;
         }
         
         nav ul {
             list-style: none;
             display: flex;
-            gap: 32px;
+            gap: 2rem;
             align-items: center;
             flex-wrap: wrap;
         }
         
         nav a {
-            color: var(--light-steel);
+            color: var(--text-dark);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: color 0.2s;
         }
         
         nav a:hover {
-            color: var(--orange-accent);
+            color: var(--light-blue);
         }
         
         .nav-logo {
             font-weight: 700;
-            color: var(--white) !important;
+            font-size: 1.25rem;
+            color: var(--navy) !important;
             margin-right: auto;
-            font-size: 16px;
-            letter-spacing: 0.5px;
         }
         
-        /* Hero Section */
-        .hero {
-            min-height: 65vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-blue) 100%);
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(70, 130, 180, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-            position: relative;
-            z-index: 1;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .hero-content {
-            padding: 4rem 0;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
             text-align: center;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .year-badge {
+        .hero-badge {
             display: inline-block;
-            color: var(--orange-accent);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--white);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--light-steel);
-            max-width: 650px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-        
-        .hero-bullets {
-            list-style: none;
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-        
-        .hero-bullets li {
-            padding-left: 2rem;
-            position: relative;
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
-            color: var(--light-steel);
-            text-align: left;
-        }
-        
-        .hero-bullets li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--orange-accent);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        .cta-group {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 500;
-            text-decoration: none;
+            background: var(--pale-blue);
+            color: var(--dark-blue);
+            padding: 0.5rem 1rem;
             border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .btn-primary {
-            background: var(--orange-accent);
-            color: var(--white);
-        }
-        
-        .btn-primary:hover {
-            background: #ff8255;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
-        }
-        
-        .btn-secondary {
-            color: var(--accent-steel);
-            text-decoration: none;
+            font-size: 0.875rem;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: transparent;
-            padding: 0;
-        }
-        
-        .btn-secondary:hover {
-            color: var(--orange-accent);
-            text-decoration: underline;
-        }
-        
-        /* Stats Strip */
-        .stats-strip {
-            padding: 4.5rem 0;
-            background: var(--charcoal);
-            border-top: 1px solid rgba(70, 130, 180, 0.3);
-            border-bottom: 1px solid rgba(70, 130, 180, 0.3);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-        }
-        
-        .stat-card {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: fadeInUp 0.6s ease-out forwards;
-            animation-delay: calc(var(--i) * 0.1s);
-        }
-        
-        .stat-card:nth-child(1) { --i: 1; }
-        .stat-card:nth-child(2) { --i: 2; }
-        .stat-card:nth-child(3) { --i: 3; }
-        .stat-card:nth-child(4) { --i: 4; }
-        .stat-card:nth-child(5) { --i: 5; }
-        .stat-card:nth-child(6) { --i: 6; }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--orange-accent);
-            font-weight: 600;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--light-steel);
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        .stat-detail {
-            font-size: 0.75rem;
-            color: var(--medium-gray);
-            margin-top: 0.5rem;
-            line-height: 1.4;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .hero-points {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-points li {
+            padding: 0.75rem 0;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+        
+        .hero-points li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--light-blue);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--medium-blue);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            color: var(--light-blue);
+            border: 2px solid var(--light-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--light-blue);
+            color: var(--white);
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: var(--navy);
+            padding: 4rem 0;
+            color: var(--white);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--pale-blue);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-label {
+            color: var(--light-blue);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+        
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         /* Map Section */
         .map-section {
-            padding: 4.5rem 0;
-            background: var(--primary-blue);
-            border-top: 1px solid rgba(70, 130, 180, 0.3);
-            border-bottom: 1px solid rgba(70, 130, 180, 0.3);
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
         
         .map-container {
             max-width: 1000px;
-            margin: 3rem auto 0;
-            background: rgba(255, 255, 255, 0.05);
+            margin: 0 auto;
             padding: 2rem;
+            background: var(--white);
             border-radius: 8px;
-            border: 1px solid rgba(70, 130, 180, 0.2);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         #us-map {
             width: 100%;
             height: auto;
-            display: block;
         }
         
-        .state {
-            transition: all 0.3s ease;
+        .state-path {
+            fill: var(--border-color);
+            stroke: var(--white);
+            stroke-width: 1;
             cursor: pointer;
+            transition: fill 0.3s;
         }
         
-        .state:hover {
+        .state-path.high-coverage {
+            fill: var(--light-blue);
+        }
+        
+        .state-path.medium-coverage {
+            fill: var(--accent-blue);
+            opacity: 0.6;
+        }
+        
+        .state-path.low-coverage {
+            fill: var(--pale-blue);
+            opacity: 0.5;
+        }
+        
+        .state-path:hover {
             opacity: 0.8;
         }
         
@@ -340,319 +317,180 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--light-steel);
         }
         
         .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 2px;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
         }
         
-        /* Section Styles */
-        section {
-            padding: 4.5rem 0;
-            text-align: center;
+        /* Review Section */
+        .review-section {
+            background: var(--white);
         }
         
-        .section-header {
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease-out;
-        }
-        
-        .section-header.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section-label {
-            color: var(--orange-accent);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-        
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--light-steel);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        /* Year in Review Section */
-        .year-review-section {
-            background: var(--charcoal);
-            color: var(--white);
-        }
-        
-        .review-points {
+        .review-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1000px;
-            margin: 3rem auto 0;
+            margin-top: 3rem;
         }
         
-        .review-item {
-            background: rgba(255, 255, 255, 0.05);
+        .review-card {
             padding: 2rem;
-            border-radius: 4px;
-            border-left: 3px solid var(--orange-accent);
-            text-align: left;
+            background: var(--bg-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--light-blue);
         }
         
-        .review-item h3 {
-            font-size: 1.1rem;
+        .review-card h3 {
+            color: var(--navy);
             margin-bottom: 1rem;
-            color: var(--white);
+            font-size: 1.25rem;
         }
         
-        .review-item p {
-            color: var(--light-steel);
-            line-height: 1.6;
+        .review-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
         }
         
-        /* Built for Buy-and-Builds Section */
-        .capabilities-section {
-            background: var(--dark-navy);
+        /* Capabilities Section */
+        .capabilities {
+            background: var(--bg-light);
         }
         
         .capabilities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
-        .capability-item {
-            background: rgba(255, 255, 255, 0.05);
+        .capability-card {
+            background: var(--white);
             padding: 2rem;
-            border-radius: 4px;
-            border: 1px solid rgba(70, 130, 180, 0.2);
-            opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.5s ease-out;
-            text-align: left;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .capability-item.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .capability-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
-        .capability-item:hover {
-            border-color: var(--accent-steel);
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .capability-icon {
-            font-size: 1.5rem;
-            color: var(--accent-steel);
+        .capability-card h3 {
+            color: var(--navy);
             margin-bottom: 1rem;
+            font-size: 1.25rem;
         }
         
-        .capability-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            color: var(--white);
-            font-weight: 600;
-        }
-        
-        .capability-item p {
-            color: var(--light-steel);
+        .capability-card p {
+            color: var(--text-muted);
             line-height: 1.6;
-            font-size: 0.95rem;
         }
         
-        /* Differentiation Section */
-        .differentiation {
-            background: var(--primary-blue);
-            border-top: 1px solid rgba(70, 130, 180, 0.3);
-            border-bottom: 1px solid rgba(70, 130, 180, 0.3);
+        /* Value Section */
+        .value-section {
+            background: var(--white);
         }
         
         .value-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
-        .value-item {
-            background: rgba(255, 255, 255, 0.05);
+        .value-card {
             padding: 2rem;
-            border-radius: 4px;
-            border: 1px solid rgba(70, 130, 180, 0.2);
-            text-align: left;
-            transition: all 0.3s ease;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            transition: border-color 0.2s;
         }
         
-        .value-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--orange-accent);
+        .value-card:hover {
+            border-color: var(--light-blue);
         }
         
-        .value-item h3 {
-            color: var(--white);
+        .value-card h3 {
+            color: var(--navy);
             margin-bottom: 1rem;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
         
-        .value-item p {
-            color: var(--light-steel);
-            line-height: 1.7;
-            font-size: 0.95rem;
+        .value-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
         }
         
-        /* Final CTA Section */
-        .final-cta {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-blue) 100%);
+        /* CTA Section */
+        .cta-section {
+            background: var(--navy);
+            color: var(--white);
             padding: 5rem 0;
             text-align: center;
-            position: relative;
-        }
-        
-        .final-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 3px;
-            background: var(--orange-accent);
-        }
-        
-        .cta-content {
-            max-width: 600px;
-            margin: 0 auto;
         }
         
         .cta-content h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             color: var(--white);
-            margin-bottom: 1.25rem;
         }
         
         .cta-content p {
-            font-size: 1.1rem;
-            color: var(--light-steel);
+            font-size: 1.25rem;
             margin-bottom: 2rem;
+            color: var(--pale-blue);
         }
         
         /* Footer */
         footer {
-            background: var(--dark-navy);
-            color: var(--medium-gray);
+            background: var(--bg-light);
             padding: 3rem 0;
             text-align: center;
-            font-size: 0.9rem;
-            border-top: 1px solid var(--charcoal);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
         }
         
         footer a {
-            color: var(--accent-steel);
+            color: var(--light-blue);
             text-decoration: none;
         }
         
         footer a:hover {
-            color: var(--orange-accent);
             text-decoration: underline;
         }
         
-        /* Scroll animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.5s ease-out;
-        }
-        
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Tooltip */
-        .map-tooltip {
-            position: absolute;
-            background: var(--dark-navy);
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            border: 1px solid var(--accent-steel);
-            font-size: 0.85rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1000;
-        }
-        
-        .map-tooltip.show {
-            opacity: 0.95;
-        }
-        
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            
-            .hero {
-                min-height: 60vh;
-            }
-            
             .hero h1 {
                 font-size: 2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 2rem;
-            }
-            
-            .stat-number {
-                font-size: 2rem;
-            }
-            
-            section {
-                padding: 3rem 0;
             }
             
             .section-title {
                 font-size: 1.75rem;
             }
             
-            .capabilities-grid,
-            .review-points,
-            .value-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .stat-number {
+                font-size: 2rem;
             }
             
-            .btn {
-                padding: 0.875rem 2rem;
-                font-size: 0.95rem;
+            .capabilities-grid,
+            .review-grid,
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                font-size: 0.9rem;
+                gap: 1rem;
             }
         }
     </style>
@@ -663,10 +501,11 @@
         <div class="container">
             <ul>
                 <li><a href="#" class="nav-logo">STOC Advisory</a></li>
-                <li><a href="#year-review">2025 Review</a></li>
+                <li><a href="#review">2025 Review</a></li>
                 <li><a href="#coverage">Coverage</a></li>
-                <li><a href="#capabilities">What We Do</a></li>
-                <li><a href="#value">Differentiation</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#value">Value</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -675,75 +514,74 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="year-badge">2026 Platform Partner</div>
+                <div class="hero-badge">2026 Platform Partner</div>
                 <h1>Helping platforms scale with confidence in 2026</h1>
                 <p class="hero-subtitle">Re-introducing STOC as a partner that understands platform scaling, not just deal execution.</p>
                 
-                <ul class="hero-bullets">
+                <ul class="hero-points">
                     <li>Repeatable diligence designed for buy-and-build velocity</li>
                     <li>Integration-ready normalization frameworks</li>
                     <li>Platform-level insight across your portfolio</li>
                 </ul>
                 
-                <div class="cta-group">
-                    <a href="mailto:aswihart@stocadvisory.com?subject=Platform%20Scaling%20Discussion%20-%202026&body=Hi%20STOC%20team%2C%0A%0AWe're%20interested%20in%20discussing%20diligence%20support%20for%20our%20buy-and-build%20platform.%0A%0APlatform%20sector%3A%0ACurrent%20portfolio%20size%3A%0AExpected%20add-on%20pace%3A%0ABest%20contact%3A" 
-                       class="btn btn-primary">Connect for 2026</a>
-                    <a href="#capabilities" class="btn-secondary">Our approach →</a>
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary">Connect for 2026</a>
+                    <a href="#capabilities" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Strip -->
-    <section class="stats-strip">
+    <!-- Stats Section -->
+    <section class="stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">73</div>
-                    <div class="stat-label">QoEs in 2025</div>
+                <div class="stat">
+                    <span class="stat-number">73</span>
+                    <span class="stat-label">QoEs in 2025</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">6</div>
-                    <div class="stat-label">Platform Partners</div>
+                <div class="stat">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Platform Partners</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Add-on Diligences</div>
+                <div class="stat">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Add-on Diligences</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">States Covered</div>
+                <div class="stat">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">States Covered</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">2-3</div>
-                    <div class="stat-label">Week Turnaround</div>
+                <div class="stat">
+                    <span class="stat-number">2-3</span>
+                    <span class="stat-label">Week Turnaround</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Repeatable Process</div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Repeatable Process</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 2025 Year in Review -->
-    <section id="year-review" class="year-review-section fade-in-section">
+    <section id="review" class="review-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">2025 Year in Review</div>
-                <h2 class="section-title">Supporting multi-acquisition platforms</h2>
+                <h2 class="section-title">Supporting Multi-Acquisition Platforms</h2>
                 <p class="section-description">Focus on repeatable diligence, integration readiness, and scalability</p>
             </div>
-            <div class="review-points">
-                <div class="review-item">
+            <div class="review-grid">
+                <div class="review-card">
                     <h3>Platform Partnerships</h3>
                     <p>Supported 6 buy-and-build platforms executing aggressive add-on strategies across fragmented markets</p>
                 </div>
-                <div class="review-item">
+                <div class="review-card">
                     <h3>Geographic Expansion</h3>
                     <p>Expanded coverage to 30+ states and metropolitan areas, providing local market context and operational insights</p>
                 </div>
-                <div class="review-item">
+                <div class="review-card">
                     <h3>Integration Success</h3>
                     <p>Delivered normalized views that held up through integration and post-close reporting</p>
                 </div>
@@ -752,7 +590,7 @@
     </section>
 
     <!-- Geographic Coverage Map -->
-    <section id="coverage" class="map-section fade-in-section">
+    <section id="coverage" class="map-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">National Coverage</div>
@@ -760,69 +598,80 @@
                 <p class="section-description">Deep local market knowledge across the United States</p>
             </div>
             <div class="map-container">
-                <svg id="us-map" viewBox="0 0 959 593" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Simplified US Map -->
+                <!-- Simplified US Map SVG -->
+                <svg id="us-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 959 593">
                     <g id="states">
-                        <!-- States with coverage - using simplified paths -->
-                        <path class="state" data-state="WA" data-coverage="high" fill="#ff8255" d="M 93 113 L 158 113 L 158 168 L 93 168 Z"/>
-                        <path class="state" data-state="OR" data-coverage="medium" fill="#4682b4" d="M 93 168 L 158 168 L 158 213 L 93 213 Z"/>
-                        <path class="state" data-state="CA" data-coverage="high" fill="#ff8255" d="M 93 213 L 158 213 L 158 343 L 93 343 Z"/>
-                        <path class="state" data-state="NV" data-coverage="low" fill="#2c5f7f" d="M 158 213 L 213 213 L 213 283 L 158 283 Z"/>
-                        <path class="state" data-state="ID" data-coverage="low" fill="#2c5f7f" d="M 158 113 L 213 113 L 213 213 L 158 213 Z"/>
-                        <path class="state" data-state="UT" data-coverage="medium" fill="#4682b4" d="M 213 213 L 268 213 L 268 283 L 213 283 Z"/>
-                        <path class="state" data-state="AZ" data-coverage="high" fill="#ff8255" d="M 213 283 L 283 283 L 283 363 L 213 363 Z"/>
-                        <path class="state" data-state="CO" data-coverage="low" fill="#2c5f7f" d="M 268 213 L 368 213 L 368 283 L 268 283 Z"/>
-                        <path class="state" data-state="NM" data-coverage="none" fill="#1a3a52" d="M 268 283 L 343 283 L 343 363 L 268 363 Z"/>
-                        <path class="state" data-state="TX" data-coverage="medium" fill="#4682b4" d="M 343 343 L 463 343 L 463 463 L 343 463 Z"/>
-                        <path class="state" data-state="OK" data-coverage="none" fill="#1a3a52" d="M 368 283 L 463 283 L 463 343 L 368 343 Z"/>
-                        <path class="state" data-state="KS" data-coverage="none" fill="#1a3a52" d="M 368 233 L 463 233 L 463 283 L 368 283 Z"/>
-                        <path class="state" data-state="NE" data-coverage="none" fill="#1a3a52" d="M 368 183 L 463 183 L 463 233 L 368 233 Z"/>
-                        <path class="state" data-state="SD" data-coverage="medium" fill="#4682b4" d="M 368 133 L 463 133 L 463 183 L 368 183 Z"/>
-                        <path class="state" data-state="ND" data-coverage="none" fill="#1a3a52" d="M 368 83 L 463 83 L 463 133 L 368 133 Z"/>
-                        <path class="state" data-state="MN" data-coverage="high" fill="#ff8255" d="M 463 83 L 533 83 L 533 183 L 463 183 Z"/>
-                        <path class="state" data-state="IA" data-coverage="none" fill="#1a3a52" d="M 463 183 L 533 183 L 533 233 L 463 233 Z"/>
-                        <path class="state" data-state="MO" data-coverage="none" fill="#1a3a52" d="M 463 233 L 533 233 L 533 313 L 463 313 Z"/>
-                        <path class="state" data-state="AR" data-coverage="none" fill="#1a3a52" d="M 463 313 L 533 313 L 533 363 L 463 363 Z"/>
-                        <path class="state" data-state="LA" data-coverage="low" fill="#2c5f7f" d="M 463 363 L 533 363 L 533 413 L 463 413 Z"/>
-                        <path class="state" data-state="WI" data-coverage="none" fill="#1a3a52" d="M 533 133 L 593 133 L 593 213 L 533 213 Z"/>
-                        <path class="state" data-state="IL" data-coverage="high" fill="#ff8255" d="M 533 213 L 593 213 L 593 313 L 533 313 Z"/>
-                        <path class="state" data-state="MS" data-coverage="none" fill="#1a3a52" d="M 533 363 L 583 363 L 583 413 L 533 413 Z"/>
-                        <path class="state" data-state="IN" data-coverage="high" fill="#ff8255" d="M 593 213 L 643 213 L 643 283 L 593 283 Z"/>
-                        <path class="state" data-state="MI" data-coverage="medium" fill="#4682b4" d="M 593 133 L 663 133 L 663 213 L 593 213 Z"/>
-                        <path class="state" data-state="OH" data-coverage="medium" fill="#4682b4" d="M 643 213 L 703 213 L 703 283 L 643 283 Z"/>
-                        <path class="state" data-state="KY" data-coverage="none" fill="#1a3a52" d="M 593 283 L 693 283 L 693 333 L 593 333 Z"/>
-                        <path class="state" data-state="TN" data-coverage="none" fill="#1a3a52" d="M 593 333 L 693 333 L 693 383 L 593 383 Z"/>
-                        <path class="state" data-state="AL" data-coverage="low" fill="#2c5f7f" d="M 583 383 L 643 383 L 643 463 L 583 463 Z"/>
-                        <path class="state" data-state="GA" data-coverage="medium" fill="#4682b4" d="M 643 383 L 703 383 L 703 463 L 643 463 Z"/>
-                        <path class="state" data-state="FL" data-coverage="high" fill="#ff8255" d="M 643 463 L 743 463 L 743 563 L 643 563 Z"/>
-                        <path class="state" data-state="SC" data-coverage="none" fill="#1a3a52" d="M 703 383 L 753 383 L 753 433 L 703 433 Z"/>
-                        <path class="state" data-state="NC" data-coverage="high" fill="#ff8255" d="M 693 333 L 793 333 L 793 383 L 693 383 Z"/>
-                        <path class="state" data-state="VA" data-coverage="medium" fill="#4682b4" d="M 703 283 L 793 283 L 793 333 L 703 333 Z"/>
-                        <path class="state" data-state="WV" data-coverage="none" fill="#1a3a52" d="M 693 243 L 733 243 L 733 283 L 693 283 Z"/>
-                        <path class="state" data-state="MD" data-coverage="medium" fill="#4682b4" d="M 753 263 L 803 263 L 803 293 L 753 293 Z"/>
-                        <path class="state" data-state="DE" data-coverage="low" fill="#2c5f7f" d="M 803 273 L 823 273 L 823 303 L 803 303 Z"/>
-                        <path class="state" data-state="PA" data-coverage="high" fill="#ff8255" d="M 703 213 L 793 213 L 793 263 L 703 263 Z"/>
-                        <path class="state" data-state="NJ" data-coverage="high" fill="#ff8255" d="M 793 233 L 823 233 L 823 283 L 793 283 Z"/>
-                        <path class="state" data-state="NY" data-coverage="high" fill="#ff8255" d="M 703 133 L 823 133 L 823 213 L 703 213 Z"/>
-                        <path class="state" data-state="CT" data-coverage="high" fill="#ff8255" d="M 823 203 L 863 203 L 863 233 L 823 233 Z"/>
-                        <path class="state" data-state="RI" data-coverage="none" fill="#1a3a52" d="M 863 203 L 883 203 L 883 223 L 863 223 Z"/>
-                        <path class="state" data-state="MA" data-coverage="low" fill="#2c5f7f" d="M 823 173 L 893 173 L 893 203 L 823 203 Z"/>
-                        <path class="state" data-state="VT" data-coverage="none" fill="#1a3a52" d="M 823 133 L 853 133 L 853 173 L 823 173 Z"/>
-                        <path class="state" data-state="NH" data-coverage="none" fill="#1a3a52" d="M 853 133 L 883 133 L 883 173 L 853 173 Z"/>
-                        <path class="state" data-state="ME" data-coverage="none" fill="#1a3a52" d="M 883 93 L 933 93 L 933 173 L 883 173 Z"/>
+                        <!-- Using actual state boundaries but simplified for web display -->
+                        <!-- High Coverage States -->
+                        <path class="state-path high-coverage" data-state="WA" d="M 84 69 L 159 64 L 162 134 L 84 142 Z"/>
+                        <path class="state-path high-coverage" data-state="CA" d="M 58 191 L 141 180 L 165 363 L 74 329 Z"/>
+                        <path class="state-path high-coverage" data-state="AZ" d="M 141 312 L 234 304 L 239 388 L 156 393 Z"/>
+                        <path class="state-path high-coverage" data-state="TX" d="M 324 359 L 483 350 L 487 488 L 347 501 Z"/>
+                        <path class="state-path high-coverage" data-state="FL" d="M 665 436 L 735 439 L 774 549 L 693 543 Z"/>
+                        <path class="state-path high-coverage" data-state="IL" d="M 559 198 L 612 195 L 614 284 L 563 286 Z"/>
+                        <path class="state-path high-coverage" data-state="IN" d="M 614 217 L 656 215 L 659 274 L 616 276 Z"/>
+                        <path class="state-path high-coverage" data-state="PA" d="M 733 174 L 814 170 L 816 221 L 736 225 Z"/>
+                        <path class="state-path high-coverage" data-state="NY" d="M 753 112 L 839 108 L 842 174 L 756 178 Z"/>
+                        <path class="state-path high-coverage" data-state="NJ" d="M 814 195 L 834 193 L 836 229 L 816 231 Z"/>
+                        <path class="state-path high-coverage" data-state="NC" d="M 711 305 L 808 301 L 811 347 L 714 351 Z"/>
+                        <path class="state-path high-coverage" data-state="CT" d="M 839 168 L 864 167 L 865 187 L 841 188 Z"/>
+                        <path class="state-path high-coverage" data-state="MN" d="M 488 104 L 559 101 L 562 186 L 491 189 Z"/>
+                        
+                        <!-- Medium Coverage States -->
+                        <path class="state-path medium-coverage" data-state="OR" d="M 84 142 L 159 134 L 162 191 L 84 199 Z"/>
+                        <path class="state-path medium-coverage" data-state="UT" d="M 234 213 L 302 209 L 305 284 L 237 288 Z"/>
+                        <path class="state-path medium-coverage" data-state="MI" d="M 616 143 L 679 140 L 682 215 L 619 218 Z"/>
+                        <path class="state-path medium-coverage" data-state="OH" d="M 659 217 L 714 214 L 717 271 L 662 274 Z"/>
+                        <path class="state-path medium-coverage" data-state="VA" d="M 736 252 L 808 248 L 811 301 L 739 305 Z"/>
+                        <path class="state-path medium-coverage" data-state="MD" d="M 793 232 L 823 230 L 825 252 L 795 254 Z"/>
+                        <path class="state-path medium-coverage" data-state="GA" d="M 665 351 L 724 348 L 727 436 L 668 439 Z"/>
+                        <path class="state-path medium-coverage" data-state="SD" d="M 399 134 L 488 131 L 491 189 L 402 192 Z"/>
+                        
+                        <!-- Low Coverage States -->
+                        <path class="state-path low-coverage" data-state="ID" d="M 162 134 L 234 130 L 237 213 L 165 217 Z"/>
+                        <path class="state-path low-coverage" data-state="CO" d="M 302 213 L 399 209 L 402 284 L 305 288 Z"/>
+                        <path class="state-path low-coverage" data-state="LA" d="M 483 401 L 547 398 L 550 453 L 486 456 Z"/>
+                        <path class="state-path low-coverage" data-state="AL" d="M 608 351 L 665 348 L 668 436 L 611 439 Z"/>
+                        <path class="state-path low-coverage" data-state="MA" d="M 839 147 L 879 145 L 881 168 L 841 170 Z"/>
+                        <path class="state-path low-coverage" data-state="DE" d="M 823 229 L 833 228 L 834 248 L 825 249 Z"/>
+                        
+                        <!-- No Coverage States (default gray) -->
+                        <path class="state-path" data-state="MT" d="M 234 69 L 399 64 L 402 134 L 237 139 Z"/>
+                        <path class="state-path" data-state="ND" d="M 399 69 L 488 66 L 491 104 L 402 107 Z"/>
+                        <path class="state-path" data-state="WY" d="M 302 134 L 399 130 L 402 209 L 305 213 Z"/>
+                        <path class="state-path" data-state="NV" d="M 141 191 L 234 186 L 237 284 L 144 289 Z"/>
+                        <path class="state-path" data-state="NM" d="M 234 288 L 324 284 L 327 359 L 237 363 Z"/>
+                        <path class="state-path" data-state="KS" d="M 399 213 L 488 209 L 491 268 L 402 272 Z"/>
+                        <path class="state-path" data-state="NE" d="M 399 189 L 488 186 L 491 213 L 402 217 Z"/>
+                        <path class="state-path" data-state="OK" d="M 399 284 L 483 280 L 486 350 L 402 354 Z"/>
+                        <path class="state-path" data-state="IA" d="M 488 186 L 559 183 L 562 233 L 491 236 Z"/>
+                        <path class="state-path" data-state="MO" d="M 491 236 L 559 233 L 562 301 L 494 304 Z"/>
+                        <path class="state-path" data-state="AR" d="M 491 301 L 559 298 L 562 359 L 494 362 Z"/>
+                        <path class="state-path" data-state="WI" d="M 559 143 L 616 140 L 619 198 L 562 201 Z"/>
+                        <path class="state-path" data-state="MS" d="M 550 359 L 608 356 L 611 439 L 553 442 Z"/>
+                        <path class="state-path" data-state="TN" d="M 562 301 L 665 297 L 668 351 L 565 355 Z"/>
+                        <path class="state-path" data-state="KY" d="M 614 271 L 711 267 L 714 305 L 617 309 Z"/>
+                        <path class="state-path" data-state="WV" d="M 714 221 L 756 218 L 759 267 L 717 270 Z"/>
+                        <path class="state-path" data-state="SC" d="M 724 347 L 774 344 L 777 388 L 727 391 Z"/>
+                        <path class="state-path" data-state="VT" d="M 839 112 L 859 111 L 860 147 L 841 148 Z"/>
+                        <path class="state-path" data-state="NH" d="M 859 111 L 879 110 L 881 147 L 861 148 Z"/>
+                        <path class="state-path" data-state="ME" d="M 879 69 L 919 67 L 921 147 L 881 149 Z"/>
+                        <path class="state-path" data-state="RI" d="M 864 168 L 874 167 L 875 182 L 865 183 Z"/>
+                        <path class="state-path" data-state="HI" d="M 230 520 L 280 517 L 283 547 L 233 550 Z"/>
+                        <path class="state-path" data-state="AK" d="M 93 465 L 183 460 L 188 550 L 98 555 Z"/>
                     </g>
                 </svg>
                 <div class="map-legend">
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #ff8255;"></div>
+                        <div class="legend-color" style="background: var(--light-blue);"></div>
                         <span>High Activity (5+ deals)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #4682b4;"></div>
+                        <div class="legend-color" style="background: var(--accent-blue); opacity: 0.6;"></div>
                         <span>Medium Activity (2-4 deals)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #2c5f7f;"></div>
+                        <div class="legend-color" style="background: var(--pale-blue); opacity: 0.5;"></div>
                         <span>Low Activity (1 deal)</span>
                     </div>
                 </div>
@@ -830,42 +679,36 @@
         </div>
     </section>
 
-    <!-- What We Do Best for Buy-and-Builds -->
-    <section id="capabilities" class="capabilities-section fade-in-section">
+    <!-- What We Do Best -->
+    <section id="capabilities" class="capabilities">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">What We Do Best</div>
-                <h2 class="section-title">Diligence designed for add-on velocity</h2>
+                <h2 class="section-title">Diligence Designed for Add-on Velocity</h2>
                 <p class="section-description">Normalization with integration in mind</p>
             </div>
             <div class="capabilities-grid">
-                <div class="capability-item">
-                    <div class="capability-icon">→</div>
+                <div class="capability-card">
                     <h3>Repeatable Diligence Process</h3>
                     <p>Standardized frameworks that accelerate add-on evaluations without sacrificing depth. Each deal builds on platform knowledge.</p>
                 </div>
-                <div class="capability-item">
-                    <div class="capability-icon">→</div>
+                <div class="capability-card">
                     <h3>Integration-Ready Normalization</h3>
                     <p>EBITDA adjustments and working capital views that hold up through integration and into post-close reporting.</p>
                 </div>
-                <div class="capability-item">
-                    <div class="capability-icon">→</div>
+                <div class="capability-card">
                     <h3>KPI Frameworks That Scale</h3>
                     <p>Metrics and reporting structures that survive roll-ups and create true comparability across portfolio companies.</p>
                 </div>
-                <div class="capability-item">
-                    <div class="capability-icon">→</div>
+                <div class="capability-card">
                     <h3>Platform-Level Insight</h3>
                     <p>Not just one-off QoE, but cumulative understanding of your platform's operating model and integration capabilities.</p>
                 </div>
-                <div class="capability-item">
-                    <div class="capability-icon">→</div>
+                <div class="capability-card">
                     <h3>Cross-Portfolio Benchmarking</h3>
                     <p>Compare targets and portfolio companies on consistent basis. Identify synergies and best practices across the platform.</p>
                 </div>
-                <div class="capability-item">
-                    <div class="capability-icon">→</div>
+                <div class="capability-card">
                     <h3>Fast-Turn Execution</h3>
                     <p>2-3 week turnarounds for add-ons without compromising analytical rigor. Speed matched to deal velocity.</p>
                 </div>
@@ -874,42 +717,35 @@
     </section>
 
     <!-- Where We Add Differentiated Value -->
-    <section id="value" class="differentiation fade-in-section">
+    <section id="value" class="value-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Differentiated Value</div>
-                <h2 class="section-title">Where we add unique value</h2>
+                <h2 class="section-title">Where We Add Unique Value</h2>
                 <p class="section-description">Operator-informed diligence for platform builders</p>
             </div>
             <div class="value-grid">
-                <div class="value-item">
+                <div class="value-card">
                     <h3>Platform Consistency</h3>
-                    <p>Every add-on analyzed through the same lens. Your IC gets apple-to-apple comparisons and your operators get consistent integration roadmaps.</p>
+                    <p>Every add-on analyzed through the same lens. Your IC gets apple-to-apple comparisons.</p>
+                    <p>Your operators get consistent integration roadmaps built on cumulative platform knowledge.</p>
                 </div>
-                <div class="value-item">
+                <div class="value-card">
                     <h3>Operator Perspective</h3>
-                    <p>We think like operators, not auditors. Our analysis focuses on what drives value, what breaks during integration, and what creates sustainable margins.</p>
-                </div>
-                <div class="value-item">
-                    <h3>Speed Without Compromise</h3>
-                    <p>Accelerated timelines for add-ons leveraging platform knowledge. Each deal makes the next one faster and more targeted.</p>
-                </div>
-                <div class="value-item">
-                    <h3>Integration Focus</h3>
-                    <p>Diligence outputs designed to translate directly into 100-day plans and post-close KPIs. No rework required.</p>
+                    <p>We think like operators, not auditors. Our analysis focuses on what drives value.</p>
+                    <p>Understanding what breaks during integration and what creates sustainable margins.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta">
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to scale your platform in 2026?</h2>
+                <h2>Ready to Scale Your Platform in 2026?</h2>
                 <p>Let's discuss how repeatable diligence can accelerate your buy-and-build strategy.</p>
-                <a href="mailto:aswihart@stocadvisory.com?subject=Platform%20Scaling%20Discussion%20-%202026&body=Hi%20STOC%20team%2C%0A%0AWe're%20interested%20in%20discussing%20diligence%20support%20for%20our%20buy-and-build%20platform.%0A%0APlatform%20sector%3A%0ACurrent%20portfolio%20size%3A%0AExpected%20add-on%20pace%3A%0ABest%20contact%3A" 
-                   class="btn btn-primary">Start the Conversation</a>
+                <a href="mailto:aswihart@stocadvisory.com" class="btn btn-primary">Start the Conversation</a>
             </div>
         </div>
     </section>
@@ -918,7 +754,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 STOC Advisory. Transaction diligence for middle-market private equity.</p>
-            <p style="margin-top: 1rem;">
+            <p>
                 <a href="mailto:aswihart@stocadvisory.com">aswihart@stocadvisory.com</a> | 
                 <a href="https://www.stocadvisory.com">www.stocadvisory.com</a>
             </p>
@@ -926,79 +762,66 @@
     </footer>
 
     <script>
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Animate items within sections
-                    const items = entry.target.querySelectorAll('.capability-item, .review-item, .value-item');
-                    items.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                        }, index * 100);
-                    });
-                }
-            });
-        }, observerOptions);
-        
-        // Smooth scrolling
-        function smoothScroll(event) {
-            if (event.target.hash) {
-                event.preventDefault();
-                const target = document.querySelector(event.target.hash);
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 }
-            }
-        }
+            });
+        });
+
+        // Add interactive tooltips to map states
+        const states = document.querySelectorAll('.state-path');
+        const stateNames = {
+            'WA': 'Washington', 'OR': 'Oregon', 'CA': 'California', 'NV': 'Nevada',
+            'ID': 'Idaho', 'MT': 'Montana', 'WY': 'Wyoming', 'UT': 'Utah',
+            'CO': 'Colorado', 'AZ': 'Arizona', 'NM': 'New Mexico', 'TX': 'Texas',
+            'ND': 'North Dakota', 'SD': 'South Dakota', 'NE': 'Nebraska', 'KS': 'Kansas',
+            'OK': 'Oklahoma', 'MN': 'Minnesota', 'IA': 'Iowa', 'MO': 'Missouri',
+            'AR': 'Arkansas', 'LA': 'Louisiana', 'WI': 'Wisconsin', 'IL': 'Illinois',
+            'MS': 'Mississippi', 'IN': 'Indiana', 'MI': 'Michigan', 'OH': 'Ohio',
+            'KY': 'Kentucky', 'TN': 'Tennessee', 'AL': 'Alabama', 'FL': 'Florida',
+            'GA': 'Georgia', 'SC': 'South Carolina', 'NC': 'North Carolina',
+            'VA': 'Virginia', 'WV': 'West Virginia', 'MD': 'Maryland', 'DE': 'Delaware',
+            'PA': 'Pennsylvania', 'NJ': 'New Jersey', 'NY': 'New York', 'CT': 'Connecticut',
+            'RI': 'Rhode Island', 'MA': 'Massachusetts', 'VT': 'Vermont', 'NH': 'New Hampshire',
+            'ME': 'Maine', 'HI': 'Hawaii', 'AK': 'Alaska'
+        };
         
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth scrolling to nav links
-            const navLinks = document.querySelectorAll('nav a[href^="#"], .btn-secondary[href^="#"]');
-            navLinks.forEach(link => {
-                link.addEventListener('click', smoothScroll);
+        // Create tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.style.position = 'absolute';
+        tooltip.style.padding = '8px';
+        tooltip.style.background = 'rgba(10, 22, 40, 0.9)';
+        tooltip.style.color = '#fff';
+        tooltip.style.borderRadius = '4px';
+        tooltip.style.fontSize = '14px';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.display = 'none';
+        tooltip.style.zIndex = '1000';
+        document.body.appendChild(tooltip);
+        
+        states.forEach(state => {
+            state.addEventListener('mouseenter', function(e) {
+                const stateCode = this.getAttribute('data-state');
+                const stateName = stateNames[stateCode] || stateCode;
+                tooltip.textContent = stateName;
+                tooltip.style.display = 'block';
             });
             
-            // Observe sections for animations
-            document.querySelectorAll('.fade-in-section, .section-header').forEach(section => {
-                observer.observe(section);
+            state.addEventListener('mousemove', function(e) {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 30 + 'px';
             });
             
-            // Add hover tooltips to map (optional enhancement)
-            const states = document.querySelectorAll('.state');
-            const tooltip = document.createElement('div');
-            tooltip.className = 'map-tooltip';
-            document.body.appendChild(tooltip);
-            
-            states.forEach(state => {
-                state.addEventListener('mouseenter', (e) => {
-                    const stateName = e.target.getAttribute('data-state');
-                    const coverage = e.target.getAttribute('data-coverage');
-                    if (coverage !== 'none') {
-                        tooltip.textContent = `${stateName}: ${coverage.charAt(0).toUpperCase() + coverage.slice(1)} Activity`;
-                        tooltip.classList.add('show');
-                    }
-                });
-                
-                state.addEventListener('mousemove', (e) => {
-                    tooltip.style.left = e.pageX + 10 + 'px';
-                    tooltip.style.top = e.pageY - 30 + 'px';
-                });
-                
-                state.addEventListener('mouseleave', () => {
-                    tooltip.classList.remove('show');
-                });
+            state.addEventListener('mouseleave', function() {
+                tooltip.style.display = 'none';
             });
         });
     </script>
