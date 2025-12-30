@@ -11,9 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- SimpleMaps Scripts -->
+    <script src="https://simplemaps.com/static/demos/resources/jquery-1.11.3.min.js"></script>
+    <script src="https://simplemaps.com/static/demos/resources/us-map/mapdata.js"></script>
+    <script src="https://simplemaps.com/static/demos/resources/us-map/usmap.js"></script>
+    
     <style>
         :root {
-            /* Colors from Branta design */
+            /* Professional Branta color palette */
             --primary-blue: #1e3a5f;
             --secondary-blue: #2c5282;
             --accent-gold: #d4af37;
@@ -85,6 +90,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 0;
+            font-family: 'Playfair Display', serif;
         }
         
         .container {
@@ -156,6 +162,29 @@
             width: 100%;
         }
         
+        /* Mobile toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .mobile-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-toggle span {
+            height: 3px;
+            width: 28px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
         /* Enhanced Hero */
         .hero {
             min-height: 100vh;
@@ -169,14 +198,13 @@
                 radial-gradient(1000px 600px at 20% 90%, rgba(44, 82, 130, 0.08), transparent 70%),
                 linear-gradient(45deg, var(--dark-navy) 0%, #1e3a5f 100%);
             padding: 160px 0 100px;
+            font-family: 'Playfair Display', serif;
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 920px;
-            margin: 0 auto;
-            text-align: center;
         }
         
         .hero h1 {
@@ -184,46 +212,47 @@
             line-height: 1.1;
             margin-bottom: 16px;
             font-weight: 300;
+        }
+        
+        .hero .line-1 {
+            display: block;
+            font-style: normal;
             background: linear-gradient(135deg, #fff 0%, #e5efff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .hero-subtitle {
+        .hero p {
             font-size: 22px;
             max-width: 780px;
             color: rgba(255, 255, 255, 0.95);
-            margin: 24px auto 32px;
+            margin: 24px 0 32px;
             font-weight: 400;
             line-height: 1.6;
         }
         
-        .hero-badge {
-            display: inline-block;
-            color: var(--accent-gold);
+        .eyebrow {
             font-size: 13px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
+            color: var(--accent-gold);
             margin-bottom: 16px;
             font-weight: 600;
         }
         
-        .hero-bullets {
+        .list {
             list-style: none;
-            margin: 2rem auto;
-            max-width: 600px;
             display: grid;
             gap: 16px;
+            margin-top: 8px;
         }
         
-        .hero-bullets li {
+        .list li {
             display: flex;
             gap: 16px;
             align-items: flex-start;
-            font-size: 19px;
-            color: rgba(255, 255, 255, 0.95);
-            text-align: left;
+            line-height: 1.6;
         }
         
         .bullet {
@@ -235,19 +264,12 @@
             box-shadow: 0 2px 4px rgba(30, 58, 95, 0.3);
         }
         
-        /* Enhanced CTA Buttons */
+        /* CTA Buttons */
         .cta-wrap {
             display: inline-flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
-            margin-top: 32px;
-        }
-        
-        .cta-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
         }
         
         .cta {
@@ -263,9 +285,17 @@
             font-size: 16px;
             transition: all 0.3s ease;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(212, 175, 55, 0.2), rgba(255, 255, 255, 0.1));
+            background-size: 200% 200%;
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            animation: gradientSlide 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientSlide {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .cta::before {
@@ -279,82 +309,50 @@
             transition: left 0.5s ease;
         }
         
+        .cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            background: linear-gradient(135deg, rgba(45, 90, 46, 0.3), rgba(255, 255, 255, 0.4), rgba(212, 175, 55, 0.3));
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        
         .cta:hover::before {
             left: 100%;
         }
         
+        .cta:hover::after {
+            opacity: 1;
+        }
+        
         .cta:hover {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+            color: var(--dark-navy);
             border-color: transparent;
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+            animation: none;
         }
         
-        .btn-secondary {
-            color: var(--accent-gold);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-        
-        .btn-secondary:hover {
-            color: var(--warm-gold);
-        }
-        
-        /* Stats Section */
-        .stats-strip {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
-            padding: 120px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 48px;
-        }
-        
-        .stat-card {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards;
-            animation-delay: calc(var(--i) * 0.1s);
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .stat-card:nth-child(1) { --i: 1; }
-        .stat-card:nth-child(2) { --i: 2; }
-        .stat-card:nth-child(3) { --i: 3; }
-        .stat-card:nth-child(4) { --i: 4; }
-        .stat-card:nth-child(5) { --i: 5; }
-        .stat-card:nth-child(6) { --i: 6; }
-        
-        .stat-number {
-            font-size: 48px;
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-gold);
-            font-weight: 400;
-            line-height: 1;
-            margin-bottom: 16px;
-        }
-        
-        .stat-label {
-            font-size: 13px;
+        .microcopy {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        /* Section Styles */
+        .microcopy::before {
+            content: '🔒';
+            font-size: 12px;
+        }
+        
+        /* Section styles */
         section {
             scroll-margin-top: 100px;
         }
@@ -387,16 +385,6 @@
             padding: 120px 0;
         }
         
-        .eyebrow {
-            font-size: 13px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            margin-bottom: 16px;
-            font-weight: 600;
-            text-align: center;
-        }
-        
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 48px;
@@ -404,7 +392,6 @@
             color: inherit;
             font-weight: 400;
             line-height: 1.2;
-            text-align: center;
         }
         
         .section-lead {
@@ -413,15 +400,9 @@
             max-width: 900px;
             line-height: 1.7;
             font-weight: 400;
-            margin: 0 auto;
-            text-align: center;
         }
         
-        .section--dark .section-lead {
-            color: rgba(255, 255, 255, 0.85);
-        }
-        
-        /* Enhanced dividers */
+        /* Dividers */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
@@ -432,15 +413,15 @@
             background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
         }
         
-        /* Review Cards */
-        .review-grid {
+        /* About cards */
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 32px;
             margin-top: 48px;
         }
         
-        .review-card {
+        .about-card {
             background: #fff;
             border: 1px solid var(--border-light);
             border-radius: 20px;
@@ -451,7 +432,7 @@
             overflow: hidden;
         }
         
-        .review-card::before {
+        .about-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -461,12 +442,12 @@
             background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
         }
         
-        .review-card:hover {
+        .about-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-xl);
         }
         
-        .review-card h3 {
+        .about-card h3 {
             color: var(--charcoal);
             font-weight: 600;
             margin-bottom: 20px;
@@ -474,19 +455,14 @@
             font-family: 'Playfair Display', serif;
         }
         
-        .review-card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-        
-        /* Map Section */
-        .map-section {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
+        /* Stats Section */
+        .stats-strip {
             padding: 120px 0;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
             position: relative;
         }
         
-        .map-section::before {
+        .stats-strip::before {
             content: '';
             position: absolute;
             top: 0;
@@ -494,507 +470,3 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(800px 400px at 20% 20%, rgba(212, 175, 55, 0.03), transparent 50%),
-                radial-gradient(600px 300px at 80% 80%, rgba(44, 82, 130, 0.02), transparent 50%);
-            pointer-events: none;
-        }
-        
-        .map-container {
-            max-width: 1000px;
-            margin: 48px auto 0;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 32px;
-            border-radius: 24px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        #us-map {
-            width: 100%;
-            height: auto;
-        }
-        
-        .state-path {
-            fill: rgba(255, 255, 255, 0.1);
-            stroke: rgba(255, 255, 255, 0.05);
-            stroke-width: 1;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .state-path.high-coverage {
-            fill: var(--accent-gold);
-            opacity: 0.8;
-        }
-        
-        .state-path.medium-coverage {
-            fill: var(--secondary-blue);
-            opacity: 0.6;
-        }
-        
-        .state-path.low-coverage {
-            fill: var(--primary-blue);
-            opacity: 0.4;
-        }
-        
-        .state-path:hover {
-            opacity: 1;
-            transform: scale(1.02);
-        }
-        
-        .map-legend {
-            display: flex;
-            gap: 32px;
-            justify-content: center;
-            margin-top: 32px;
-            flex-wrap: wrap;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .legend-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        /* Capabilities Grid */
-        .capabilities-grid {
-            display: grid;
-            gap: 24px;
-            margin-top: 48px;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-        
-        .capability-item {
-            min-height: 180px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .capability-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--secondary-blue), var(--accent-gold));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .capability-item:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .capability-item:hover {
-            transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .capability-item h3 {
-            font-size: 19px;
-            margin-bottom: 12px;
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
-            color: #fff;
-        }
-        
-        .capability-item p {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.6;
-        }
-        
-        /* Value Cards */
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 32px;
-            margin-top: 48px;
-        }
-        
-        .value-card {
-            background: #fff;
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-        }
-        
-        .value-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--accent-gold);
-        }
-        
-        .value-card h3 {
-            color: var(--charcoal);
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .value-card p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 12px;
-        }
-        
-        /* Final CTA */
-        .final-cta {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
-            padding: 120px 0;
-            text-align: center;
-            position: relative;
-        }
-        
-        .final-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--secondary-blue), var(--accent-gold));
-        }
-        
-        .cta-content h2 {
-            font-size: 48px;
-            color: #fff;
-            margin-bottom: 24px;
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-        }
-        
-        .cta-content p {
-            font-size: 19px;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 32px;
-        }
-        
-        /* Footer */
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px 0;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #0f1629 100%);
-        }
-        
-        footer a {
-            color: var(--accent-gold);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        footer a:hover {
-            color: var(--warm-gold);
-        }
-        
-        /* Mobile */
-        @media(max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 48px; }
-            .hero-subtitle { font-size: 19px; }
-            .section-title { font-size: 38px; }
-            .pad-lg { padding: 80px 0; }
-            .capabilities-grid, .review-grid, .value-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <header id="header">
-        <nav class="container">
-            <a href="#" class="nav-logo">STOC Advisory</a>
-            <ul class="nav-links">
-                <li><a href="#review">2025 Review</a></li>
-                <li><a href="#coverage">Coverage</a></li>
-                <li><a href="#capabilities">Capabilities</a></li>
-                <li><a href="#value">Value</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <div class="hero-badge">2026 Platform Partner</div>
-            <h1>Helping platforms scale with confidence in 2026</h1>
-            <p class="hero-subtitle">Re-introducing STOC as a partner that understands platform scaling, not just deal execution.</p>
-            
-            <ul class="hero-bullets">
-                <li><span class="bullet"></span><div>Repeatable diligence designed for buy-and-build velocity</div></li>
-                <li><span class="bullet"></span><div>Integration-ready normalization frameworks</div></li>
-                <li><span class="bullet"></span><div>Platform-level insight across your portfolio</div></li>
-            </ul>
-            
-            <div class="cta-wrap">
-                <div class="cta-group">
-                    <a href="mailto:aswihart@stocadvisory.com" class="cta">Connect for 2026</a>
-                    <a href="#capabilities" class="btn-secondary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Strip -->
-    <section class="stats-strip">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">73</div>
-                    <div class="stat-label">QoEs in 2025</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">6</div>
-                    <div class="stat-label">Platform Partners</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Add-on Diligences</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">States Covered</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2-3</div>
-                    <div class="stat-label">Week Turnaround</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Repeatable Process</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 2025 Year in Review -->
-    <section id="review" class="section--light pad-lg">
-        <div class="container">
-            <div class="eyebrow">2025 Year in Review</div>
-            <h2 class="section-title">Supporting Multi-Acquisition Platforms</h2>
-            <p class="section-lead">Focus on repeatable diligence, integration readiness, and scalability</p>
-            
-            <div class="review-grid">
-                <div class="review-card">
-                    <h3>Platform Partnerships</h3>
-                    <p>Supported 6 buy-and-build platforms executing aggressive add-on strategies across fragmented markets</p>
-                </div>
-                <div class="review-card">
-                    <h3>Geographic Expansion</h3>
-                    <p>Expanded coverage to 30+ states and metropolitan areas, providing local market context and operational insights</p>
-                </div>
-                <div class="review-card">
-                    <h3>Integration Success</h3>
-                    <p>Delivered normalized views that held up through integration and post-close reporting</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Geographic Coverage Map -->
-    <section id="coverage" class="map-section">
-        <div class="container">
-            <div class="eyebrow">National Coverage</div>
-            <h2 class="section-title">30+ States and Metros</h2>
-            <p class="section-lead">Deep local market knowledge across the United States</p>
-            
-            <div class="map-container">
-                <!-- Simplified US Map SVG -->
-                <svg id="us-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 959 593">
-                    <g id="states">
-                        <!-- High Coverage States -->
-                        <path class="state-path high-coverage" data-state="WA" d="M 84 69 L 159 64 L 162 134 L 84 142 Z"/>
-                        <path class="state-path high-coverage" data-state="CA" d="M 58 191 L 141 180 L 165 363 L 74 329 Z"/>
-                        <path class="state-path high-coverage" data-state="AZ" d="M 141 312 L 234 304 L 239 388 L 156 393 Z"/>
-                        <path class="state-path high-coverage" data-state="TX" d="M 324 359 L 483 350 L 487 488 L 347 501 Z"/>
-                        <path class="state-path high-coverage" data-state="FL" d="M 665 436 L 735 439 L 774 549 L 693 543 Z"/>
-                        <path class="state-path high-coverage" data-state="IL" d="M 559 198 L 612 195 L 614 284 L 563 286 Z"/>
-                        <path class="state-path high-coverage" data-state="IN" d="M 614 217 L 656 215 L 659 274 L 616 276 Z"/>
-                        <path class="state-path high-coverage" data-state="PA" d="M 733 174 L 814 170 L 816 221 L 736 225 Z"/>
-                        <path class="state-path high-coverage" data-state="NY" d="M 753 112 L 839 108 L 842 174 L 756 178 Z"/>
-                        <path class="state-path high-coverage" data-state="NJ" d="M 814 195 L 834 193 L 836 229 L 816 231 Z"/>
-                        <path class="state-path high-coverage" data-state="NC" d="M 711 305 L 808 301 L 811 347 L 714 351 Z"/>
-                        <path class="state-path high-coverage" data-state="CT" d="M 839 168 L 864 167 L 865 187 L 841 188 Z"/>
-                        <path class="state-path high-coverage" data-state="MN" d="M 488 104 L 559 101 L 562 186 L 491 189 Z"/>
-                        
-                        <!-- Medium Coverage States -->
-                        <path class="state-path medium-coverage" data-state="OR" d="M 84 142 L 159 134 L 162 191 L 84 199 Z"/>
-                        <path class="state-path medium-coverage" data-state="UT" d="M 234 213 L 302 209 L 305 284 L 237 288 Z"/>
-                        <path class="state-path medium-coverage" data-state="MI" d="M 616 143 L 679 140 L 682 215 L 619 218 Z"/>
-                        <path class="state-path medium-coverage" data-state="OH" d="M 659 217 L 714 214 L 717 271 L 662 274 Z"/>
-                        <path class="state-path medium-coverage" data-state="VA" d="M 736 252 L 808 248 L 811 301 L 739 305 Z"/>
-                        <path class="state-path medium-coverage" data-state="MD" d="M 793 232 L 823 230 L 825 252 L 795 254 Z"/>
-                        <path class="state-path medium-coverage" data-state="GA" d="M 665 351 L 724 348 L 727 436 L 668 439 Z"/>
-                        <path class="state-path medium-coverage" data-state="SD" d="M 399 134 L 488 131 L 491 189 L 402 192 Z"/>
-                        
-                        <!-- Low Coverage States -->
-                        <path class="state-path low-coverage" data-state="ID" d="M 162 134 L 234 130 L 237 213 L 165 217 Z"/>
-                        <path class="state-path low-coverage" data-state="CO" d="M 302 213 L 399 209 L 402 284 L 305 288 Z"/>
-                        <path class="state-path low-coverage" data-state="LA" d="M 483 401 L 547 398 L 550 453 L 486 456 Z"/>
-                        <path class="state-path low-coverage" data-state="AL" d="M 608 351 L 665 348 L 668 436 L 611 439 Z"/>
-                        <path class="state-path low-coverage" data-state="MA" d="M 839 147 L 879 145 L 881 168 L 841 170 Z"/>
-                        <path class="state-path low-coverage" data-state="DE" d="M 823 229 L 833 228 L 834 248 L 825 249 Z"/>
-                        
-                        <!-- Other states... -->
-                    </g>
-                </svg>
-                <div class="map-legend">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--accent-gold); opacity: 0.8;"></div>
-                        <span>High Activity (5+ deals)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--secondary-blue); opacity: 0.6;"></div>
-                        <span>Medium Activity (2-4 deals)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--primary-blue); opacity: 0.4;"></div>
-                        <span>Low Activity (1 deal)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- What We Do Best -->
-    <section id="capabilities" class="section--dark pad-lg">
-        <div class="container">
-            <div class="eyebrow">What We Do Best</div>
-            <h2 class="section-title">Diligence Designed for Add-on Velocity</h2>
-            <p class="section-lead">Normalization with integration in mind</p>
-            
-            <div class="capabilities-grid">
-                <div class="capability-item">
-                    <h3>Repeatable Diligence Process</h3>
-                    <p>Standardized frameworks that accelerate add-on evaluations without sacrificing depth. Each deal builds on platform knowledge.</p>
-                </div>
-                <div class="capability-item">
-                    <h3>Integration-Ready Normalization</h3>
-                    <p>EBITDA adjustments and working capital views that hold up through integration and into post-close reporting.</p>
-                </div>
-                <div class="capability-item">
-                    <h3>KPI Frameworks That Scale</h3>
-                    <p>Metrics and reporting structures that survive roll-ups and create true comparability across portfolio companies.</p>
-                </div>
-                <div class="capability-item">
-                    <h3>Platform-Level Insight</h3>
-                    <p>Not just one-off QoE, but cumulative understanding of your platform's operating model and integration capabilities.</p>
-                </div>
-                <div class="capability-item">
-                    <h3>Cross-Portfolio Benchmarking</h3>
-                    <p>Compare targets and portfolio companies on consistent basis. Identify synergies and best practices across the platform.</p>
-                </div>
-                <div class="capability-item">
-                    <h3>Fast-Turn Execution</h3>
-                    <p>2-3 week turnarounds for add-ons without compromising analytical rigor. Speed matched to deal velocity.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- Where We Add Differentiated Value -->
-    <section id="value" class="section--light pad-lg">
-        <div class="container">
-            <div class="eyebrow">Differentiated Value</div>
-            <h2 class="section-title">Where We Add Unique Value</h2>
-            <p class="section-lead">Operator-informed diligence for platform builders</p>
-            
-            <div class="value-grid">
-                <div class="value-card">
-                    <h3>Platform Consistency</h3>
-                    <p>Every add-on analyzed through the same lens. Your IC gets apple-to-apple comparisons.</p>
-                    <p>Your operators get consistent integration roadmaps built on cumulative platform knowledge.</p>
-                </div>
-                <div class="value-card">
-                    <h3>Operator Perspective</h3>
-                    <p>We think like operators, not auditors. Our analysis focuses on what drives value.</p>
-                    <p>Understanding what breaks during integration and what creates sustainable margins.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="final-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Scale Your Platform in 2026?</h2>
-                <p>Let's discuss how repeatable diligence can accelerate your buy-and-build strategy.</p>
-                <a href="mailto:aswihart@stocadvisory.com" class="cta">Start the Conversation</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 STOC Advisory. Transaction diligence for middle-market private equity.</p>
-            <p style="margin-top: 12px;">
-                <a href="mailto:aswihart@stocadvisory.com">aswihart@stocadvisory.com</a> | 
-                <a href="https://www.stocadvisory.com">www.stocadvisory.com</a>
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
